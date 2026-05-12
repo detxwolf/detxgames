@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>DetxGames</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial;
+}
+
+body{
+    background:#0d0d0d;
+    color:white;
+    overflow-x:hidden;
+}
+
+/* FUNDO */
+
+body::before{
+    content:"";
+    position:fixed;
+    width:100%;
+    height:100%;
+    background:
+    radial-gradient(circle at top,#00ff9950,transparent 40%),
+    radial-gradient(circle at bottom,#0099ff40,transparent 40%);
+    z-index:-1;
+}
+
+/* HEADER */
+
+header{
+    background:#111;
+    border-bottom:3px solid #00ff99;
+    padding:25px;
+    text-align:center;
+    box-shadow:0 0 20px #000;
+}
+
+header h1{
+    font-size:50px;
+    color:#00ff99;
+    text-shadow:0 0 15px #00ff99;
+}
+
+header p{
+    margin-top:10px;
+    color:#aaa;
+}
+
+/* MENU */
+
+#menu{
+    display:flex;
+    justify-content:center;
+    gap:15px;
+    padding:20px;
+    flex-wrap:wrap;
+}
+
+input{
+    padding:12px;
+    border:none;
+    border-radius:12px;
+    width:240px;
+    background:#1b1b1b;
+    color:white;
+    outline:none;
+    border:2px solid #222;
+}
+
+input:focus{
+    border-color:#00ff99;
+}
+
+button{
+    padding:12px 25px;
+    border:none;
+    border-radius:12px;
+    background:#00ff99;
+    color:black;
+    font-weight:bold;
+    cursor:pointer;
+    transition:0.2s;
+    font-size:16px;
+}
+
+button:hover{
+    transform:scale(1.05);
+    box-shadow:0 0 20px #00ff99;
+}
+
+/* GAMES */
+
+#games{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(350px,1fr));
+    gap:25px;
+    padding:25px;
+}
+
+.game{
+    background:#151515;
+    border-radius:20px;
+    overflow:hidden;
+    border:2px solid #222;
+    transition:0.2s;
+    box-shadow:0 0 15px #000;
+}
+
+.game:hover{
+    transform:translateY(-8px);
+    border-color:#00ff99;
+    box-shadow:0 0 25px #00ff99;
+}
+
+.game img{
+    width:100%;
+    height:220px;
+    object-fit:cover;
+}
+
+.info{
+    padding:15px;
+}
+
+.info h2{
+    color:#00ff99;
+    margin-bottom:10px;
+}
+
+.info p{
+    color:#ccc;
+    margin-bottom:15px;
+}
+
+iframe{
+    width:100%;
+    height:260px;
+    border:none;
+    background:black;
+}
+
+/* FOOTER */
+
+footer{
+    text-align:center;
+    padding:25px;
+    background:#111;
+    margin-top:30px;
+    border-top:3px solid #00ff99;
+    color:#999;
+}
+
+</style>
+</head>
+<body>
+
+<header>
+    <h1>🎮 DetxGames</h1>
+    <p>O melhor site para colocar seus jogos HTML</p>
+</header>
+
+<div id="menu">
+
+    <input type="text" id="nome" placeholder="Nome do jogo">
+
+    <input type="text" id="imagem" placeholder="Link da imagem">
+
+    <input type="text" id="jogo" placeholder="Link do jogo">
+
+    <button onclick="adicionarJogo()">Adicionar Jogo</button>
+
+</div>
+
+<div id="games">
+
+<!-- JOGO 1 -->
+
+<div class="game">
+
+<img src="https://images.unsplash.com/photo-1511512578047-dfb367046420?q=80&w=1200&auto=format&fit=crop">
+
+<div class="info">
+<h2>Jogo Demo</h2>
+<p>Seu jogo aparecerá aqui.</p>
+</div>
+
+<iframe src=""></iframe>
+
+</div>
+
+<!-- JOGO 2 -->
+
+<div class="game">
+
+<img src="https://images.unsplash.com/photo-1542751110-97427bbecf20?q=80&w=1200&auto=format&fit=crop">
+
+<div class="info">
+<h2>Outro Game</h2>
+<p>Adicione quantos jogos quiser.</p>
+</div>
+
+<iframe src=""></iframe>
+
+</div>
+
+</div>
+
+<footer>
+DetxGames © 2026
+</footer>
+
+<script>
+
+function adicionarJogo(){
+
+    let nome = document.getElementById("nome").value;
+    let imagem = document.getElementById("imagem").value;
+    let jogo = document.getElementById("jogo").value;
+
+    if(nome == "" || imagem == "" || jogo == ""){
+        alert("Preencha tudo!");
+        return;
+    }
+
+    let area = document.getElementById("games");
+
+    area.innerHTML += `
+
+    <div class="game">
+
+        <img src="${imagem}">
+
+        <div class="info">
+            <h2>${nome}</h2>
+            <p>Jogue agora no DetxGames.</p>
+        </div>
+
+        <iframe src="${jogo}"></iframe>
+
+    </div>
+
+    `;
+
+    document.getElementById("nome").value = "";
+    document.getElementById("imagem").value = "";
+    document.getElementById("jogo").value = "";
+}
+
+/* ENTER FUNCIONA */
+
+document.addEventListener("keypress", function(e){
+
+    if(e.key === "Enter"){
+        adicionarJogo();
+    }
+
+});
+
+</script>
+
+</body>
+</html>
